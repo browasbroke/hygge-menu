@@ -2,376 +2,428 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hygge Kafé — Уютное кафе в Уфе</title>
-  <meta name="description" content="Hygge Kafé — уютное кафе на 3 этаже ТЦ Ультра в Уфе. Авторские напитки, детские мастер-классы, семейная атмосфера. Телефон: +7 (347) 266-43-43">
-  <meta property="og:title" content="Hygge Kafé — Уютное кафе в Уфе">
-  <meta property="og:description" content="Место, где время замедляется, а каждая чашка согревает душу">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Hygge Kafé</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:   #F7F3EC;
+      --beige:   #EDE5D6;
+      --sand:    #D4C4AD;
+      --brown:   #8C6D4F;
+      --brown-d: #6B4F35;
+      --dark:    #2D2017;
+      --muted:   #7A6755;
+      --sage:    #7A9E78;
+      --white:   #FDFBF8;
+      --r:       14px;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+    html, body {
+      height: 100%;
+      background: var(--cream);
+      color: var(--dark);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overscroll-behavior: none;
+    }
+
+    /* ---- Header ---- */
+    .header {
+      background: var(--white);
+      padding: 16px 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 1px 0 var(--beige);
+    }
+
+    .header__logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+    .header__logo em { color: var(--brown); font-style: italic; font-weight: 400; }
+
+    .header__sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* ---- Category tabs ---- */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 14px;
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+
+    .tab {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 14px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      cursor: pointer;
+      border: 1.5px solid var(--beige);
+      background: transparent;
+      color: var(--muted);
+      transition: all .2s ease;
+      flex-shrink: 0;
+    }
+    .tab.active {
+      background: var(--brown);
+      border-color: var(--brown);
+      color: #fff;
+    }
+
+    /* ---- Content ---- */
+    .content {
+      padding: 16px 16px 100px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    /* ---- Menu cards ---- */
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--r);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      box-shadow: 0 1px 8px rgba(45,32,23,.07);
+      transition: transform .15s ease, box-shadow .15s ease;
+      cursor: pointer;
+    }
+    .card:active { transform: scale(.98); }
+
+    .card__img {
+      width: 88px;
+      min-height: 88px;
+      flex-shrink: 0;
+      background: var(--beige);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      overflow: hidden;
+    }
+    .card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card__body {
+      flex: 1;
+      padding: 12px 14px;
+      min-width: 0;
+    }
+
+    .card__name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card__desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 6px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card__price {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    /* ---- Bottom book button ---- */
+    .book-btn {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      padding: 12px 16px max(env(safe-area-inset-bottom), 12px);
+      background: linear-gradient(to top, var(--cream) 80%, transparent);
+    }
+
+    .book-btn__inner {
+      background: var(--brown);
+      color: #fff;
+      border: none;
+      width: 100%;
+      padding: 15px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background .2s, transform .1s;
+    }
+    .book-btn__inner:active { background: var(--brown-d); transform: scale(.98); }
+
+    /* ---- Empty state ---- */
+    .empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ---- Entrance animation ---- */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(12px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .card { animation: fadeUp .25s ease both; }
+    .card:nth-child(1)  { animation-delay: .03s; }
+    .card:nth-child(2)  { animation-delay: .06s; }
+    .card:nth-child(3)  { animation-delay: .09s; }
+    .card:nth-child(4)  { animation-delay: .12s; }
+    .card:nth-child(5)  { animation-delay: .15s; }
+    .card:nth-child(6)  { animation-delay: .18s; }
+    .card:nth-child(7)  { animation-delay: .21s; }
+    .card:nth-child(8)  { animation-delay: .24s; }
+  </style>
 </head>
 <body>
 
-  <!-- ===== NAV ===== -->
-  <nav class="nav" id="nav">
-    <div class="nav__container">
-      <a href="#" class="nav__logo">
-        <span class="nav__logo-text">Hygge</span>
-        <span class="nav__logo-sub">kafé</span>
-      </a>
-      <ul class="nav__links">
-        <li><a href="#about">О нас</a></li>
-        <li><a href="#menu">Меню</a></li>
-        <li><a href="#events">Мероприятия</a></li>
-        <li><a href="#news">Новости</a></li>
-        <li><a href="#booking">Бронь</a></li>
-        <li><a href="#contacts">Контакты</a></li>
-      </ul>
-      <a href="#booking" class="nav__cta">Забронировать</a>
-      <button class="nav__burger" id="navBurger" aria-label="Открыть меню">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
+<div class="header">
+  <div class="header__logo">Hygge <em>Kafé</em></div>
+  <div class="header__sub">ТЦ Ультра, 3 этаж · +7 (937) 849-23-18</div>
+  <div class="tabs" id="tabs"></div>
+</div>
 
-  <!-- Mobile menu overlay -->
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <ul>
-      <li><a href="#about">О нас</a></li>
-      <li><a href="#menu">Меню</a></li>
-      <li><a href="#events">Мероприятия</a></li>
-      <li><a href="#news">Новости</a></li>
-      <li><a href="#booking">Бронирование</a></li>
-      <li><a href="#contacts">Контакты</a></li>
-    </ul>
-  </div>
+<div class="content">
+  <div class="section-title" id="sectionTitle"></div>
+  <div class="menu-list" id="menuList"></div>
+</div>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero" id="hero">
-    <div class="hero__bg"></div>
-    <div class="hero__content">
-      <p class="hero__eyebrow">Уютное кафе в Уфе · ТЦ Ультра, 3 этаж</p>
-      <h1 class="hero__title">Hygge<br><em>Kafé</em></h1>
-      <p class="hero__subtitle">
-        Место, где время замедляется,<br>
-        а каждая чашка согревает душу
-      </p>
-      <div class="hero__actions">
-        <a href="#menu" class="btn btn--primary">Смотреть меню</a>
-        <a href="#booking" class="btn btn--ghost">Забронировать стол</a>
+<div class="book-btn">
+  <button class="book-btn__inner" id="bookBtn">
+    🗓 Забронировать столик
+  </button>
+</div>
+
+<script>
+// ============================================================
+//  Меню данные
+//  Обновляй здесь когда меняется меню в кафе
+// ============================================================
+const MENU = {
+  "🍳 Завтраки": {
+    emoji: "🍳",
+    note: "Будни 10:00–12:00 · Выходные 10:00–14:00",
+    items: [
+      { name:"Завтрак №1", desc:"Бекон, яичница, салат, сыр брынза, фасоль, тосты · 280г", price:450 },
+      { name:"Завтрак №2", desc:"Тигровые креветки в сливочном соусе со шпинатом, яичница, тосты · 260г", price:450 },
+      { name:"Завтрак №3", desc:"Лосось слабосолёный, яичница, салат, сливочный сыр, тосты · 280г", price:490 },
+      { name:"Завтрак №4", desc:"Сосиски, яичница, салат, тосты, кетчуп, соус тар-тар · 290г", price:440 },
+      { name:"Яичница", desc:"Из двух яиц с зеленью · 100г. Добавки: бекон/ветчина/моцарелла/томаты +80₽", price:100 },
+      { name:"Драники с лососем", desc:"Картофельные дранники с лососем, сливочным сыром и огурцом · 190г", price:470 },
+      { name:"Каша овсяная", desc:"На молоке с ягодами · 250г. На альтернативном молоке +160₽", price:190 },
+      { name:"Сырники", desc:"Три сырника с клубничным соусом и сметаной · 200г", price:290 },
+      { name:"Круассан бельгийский", desc:"Миндальная или шоколадно-ореховая начинка · 70г", price:150 },
+      { name:"Датская булочка", desc:"С корицей · 80г", price:160 },
+    ]
+  },
+  "☕ Напитки": {
+    emoji: "☕",
+    items: [
+      { name:"Эспрессо", desc:"30мл", price:190 },
+      { name:"Американо", desc:"200мл", price:190 },
+      { name:"Капучино", desc:"400мл", price:250 },
+      { name:"Латте", desc:"400мл", price:250 },
+      { name:"Раф", desc:"400мл, с сиропом на выбор", price:270 },
+      { name:"Флэт Уайт", desc:"Двойной эспрессо с молоком", price:250 },
+      { name:"Какао", desc:"С маршмеллоу и топпингом · 400мл", price:280 },
+      { name:"Горячий шоколад", desc:"380мл", price:350 },
+      { name:"Глинтвейн", desc:"300мл", price:300 },
+      { name:"Лимонад", desc:"Авторский · 350мл", price:350 },
+      { name:"Мохито", desc:"Классический или клубничный · 300мл", price:300 },
+      { name:"Морс ягодный", desc:"250мл", price:100 },
+    ]
+  },
+  "🥗 Салаты": {
+    emoji: "🥗",
+    items: [
+      { name:"Цезарь", desc:"Классический", price:490 },
+      { name:"Тёплый салат с курицей", desc:"Куриная грудка, обжаренный сыр · 291г", price:490 },
+      { name:"Салат с баклажанами", desc:"С хрустящими баклажанами · 285г", price:450 },
+      { name:"Греческий салат", desc:"Классический · 285г", price:450 },
+    ]
+  },
+  "🍽️ Основное": {
+    emoji: "🍽️",
+    items: [
+      { name:"Стейк форели", desc:"С гарниром и соусом", price:890 },
+      { name:"Бифштекс из говядины", desc:"С гарниром", price:650 },
+      { name:"Куриная грудка гриль", desc:"С гарниром и соусом", price:490 },
+      { name:"Паста с лососем", desc:"Со свежим лососем, сливочный соус", price:590 },
+      { name:"Паста карбонара", desc:"Классическая, бекон, пармезан", price:490 },
+      { name:"Грибной суп-пюре", desc:"С гренками и сливочным сыром", price:330 },
+      { name:"Том-ям", desc:"Острый суп в тайском стиле", price:590 },
+    ]
+  },
+  "🍕 Пицца": {
+    emoji: "🍕",
+    items: [
+      { name:"Маргарита", desc:"Томатный соус, моцарелла · 490г", price:590 },
+      { name:"Четыре сыра", desc:"Четыре вида сыра · 490г", price:650 },
+      { name:"Четыре сезона", desc:"Ассорти начинок · 490г", price:650 },
+      { name:"Сливочная пепперони", desc:"Сливочный соус, пепперони · 490г", price:650 },
+      { name:"Фокачча с травами", desc:"Оливковое масло, прованские травы", price:350 },
+    ]
+  },
+  "🍰 Десерты": {
+    emoji: "🍰",
+    items: [
+      { name:"Тирамису", desc:"Классический итальянский", price:350 },
+      { name:"Чизкейк", desc:"С ягодным соусом", price:350 },
+      { name:"Мороженое", desc:"С шоколадом и орешками · 2 шарика", price:180 },
+      { name:"Круассан бельгийский", desc:"Миндальная или шоколадно-ореховая начинка", price:150 },
+    ]
+  },
+  "🧸 Детское": {
+    emoji: "🧸",
+    items: [
+      { name:"Комбо №1 — Наггетсы", desc:"Наггетсы + картофель фри + соус + пицца Маргарита 2 куска + морс", price:499 },
+      { name:"Комбо №2 — Сэндвич", desc:"Сэндвич с курицей + картофель фри + соус + пицца + морс", price:499 },
+      { name:"Комбо №3 — Шашлычок", desc:"Куриный шашлычок + картофель фри + соус + овощной салатик + морс", price:499 },
+      { name:"Курочка фрикадельки", desc:"С цветными спагетти и томатным соусом · 80г", price:240 },
+      { name:"Пельмени", desc:"Из свинины и говядины", price:250 },
+      { name:"Паста карбонара детская", desc:"Сливочная, с беконом", price:350 },
+      { name:"Картофель фри", desc:"80г", price:120 },
+      { name:"Какао детское", desc:"280мл", price:280 },
+      { name:"Бабл-ти", desc:"280мл", price:120 },
+    ]
+  },
+  "🍷 Алкоголь": {
+    emoji: "🍷",
+    items: [
+      { name:"Игристое вино", desc:"Martini Brut · 125мл", price:280 },
+      { name:"Белое вино", desc:"Бокал · 150мл", price:390 },
+      { name:"Красное вино", desc:"Бокал · 150мл", price:390 },
+      { name:"Виски", desc:"Johnnie Walker, Jack Daniel's · 40мл", price:380 },
+      { name:"Ликёр Ягермайстер", desc:"40мл", price:380 },
+      { name:"Пиво безалкогольное", desc:"Балтика 0 · 450мл", price:200 },
+    ]
+  },
+};
+
+// ============================================================
+//  Telegram Web App
+// ============================================================
+const tg = window.Telegram.WebApp;
+tg.ready();
+tg.expand();
+
+// ============================================================
+//  Рендер
+// ============================================================
+let activeCategory = Object.keys(MENU)[0];
+
+function renderTabs() {
+  const tabs = document.getElementById('tabs');
+  tabs.innerHTML = Object.keys(MENU).map(cat => {
+    const { emoji } = MENU[cat];
+    const label = cat.replace(/^\S+\s+/, '');  // убираем эмодзи из названия
+    return `<button class="tab ${cat === activeCategory ? 'active' : ''}"
+      onclick="switchCategory('${cat.replace(/'/g, "\\'")}')"
+    >${emoji} ${label}</button>`;
+  }).join('');
+}
+
+function renderItems() {
+  const { items, note } = MENU[activeCategory];
+  document.getElementById('sectionTitle').textContent =
+    activeCategory.replace(/^\S+\s+/, '');
+
+  const list = document.getElementById('menuList');
+
+  if (note) {
+    list.innerHTML = `<div style="
+      background:var(--beige);border-radius:10px;
+      padding:10px 14px;font-size:12px;color:var(--muted);
+      margin-bottom:4px;
+    ">⏰ ${note}</div>`;
+  } else {
+    list.innerHTML = '';
+  }
+
+  list.innerHTML += items.map(item => `
+    <div class="card">
+      <div class="card__img">${MENU[activeCategory].emoji}</div>
+      <div class="card__body">
+        <div class="card__name">${item.name}</div>
+        <div class="card__desc">${item.desc}</div>
+        <div class="card__price">${item.price} ₽</div>
       </div>
     </div>
-    <div class="hero__scroll" aria-hidden="true">
-      <span>листай</span>
-      <div class="hero__scroll-line"></div>
-    </div>
-  </section>
+  `).join('');
+}
 
-  <!-- ===== ABOUT ===== -->
-  <section class="about" id="about">
-    <div class="container">
-      <div class="about__grid">
-        <div class="about__text">
-          <span class="section-tag">О нас</span>
-          <h2 class="section-title">Hygge — это больше,<br>чем просто кафе</h2>
-          <p>
-            <em>Hygge</em> (произносится «хюгге») — датское слово, означающее
-            особое ощущение уюта, тепла и спокойного счастья. Именно это
-            мы стараемся подарить каждому гостю.
-          </p>
-          <p>
-            Мы находимся на третьем этаже ТЦ «Ультра» и предлагаем тихое
-            место среди городской суеты — для деловых встреч, семейных
-            завтраков, детских праздников и просто хорошего кофе.
-          </p>
-          <div class="about__features">
-            <div class="about__feature">
-              <div class="about__feature-icon">☕</div>
-              <div>
-                <strong>Авторские напитки</strong>
-                <span>Кофе, чай и авторские рецепты</span>
-              </div>
-            </div>
-            <div class="about__feature">
-              <div class="about__feature-icon">🎨</div>
-              <div>
-                <strong>Детские мастер-классы</strong>
-                <span>Роспись пряников, лепка и праздники</span>
-              </div>
-            </div>
-            <div class="about__feature">
-              <div class="about__feature-icon">🌿</div>
-              <div>
-                <strong>Уютная атмосфера</strong>
-                <span>Скандинавский стиль, тепло и спокойствие</span>
-              </div>
-            </div>
-          </div>
-        </div>
+function switchCategory(cat) {
+  activeCategory = cat;
+  renderTabs();
+  renderItems();
+  // Scroll content to top
+  document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
+  // Scroll active tab into view
+  const activetab = document.querySelector('.tab.active');
+  if (activetab) activetab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
 
-        <div class="about__visual">
-          <div class="about__card about__card--big">
-            <div class="about__stat">
-              <span class="about__stat-num">5+</span>
-              <span>лет уюта<br>в Уфе</span>
-            </div>
-          </div>
-          <div class="about__card about__card--small">
-            <div class="about__stat">
-              <span class="about__stat-num">300 ₽</span>
-              <span>мастер-класс</span>
-            </div>
-          </div>
-          <div class="about__card">
-            <div class="about__stat">
-              <span class="about__stat-num">3 эт.</span>
-              <span>ТЦ «Ультра»</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+// ---- Кнопка бронирования ----
+document.getElementById('bookBtn').addEventListener('click', () => {
+  tg.sendData(JSON.stringify({ action: 'book' }));
+  // Если открыто не из бота — закрываем и показываем подсказку
+  if (!tg.initData) {
+    alert('Откройте бота @HyggeKafeBot и нажмите "Забронировать стол"');
+  }
+});
 
-  <!-- ===== MENU ===== -->
-  <section class="menu" id="menu">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Меню</span>
-        <h2 class="section-title">Что мы предлагаем</h2>
-        <p class="section-desc">Всё приготовлено с заботой и любовью к каждой детали</p>
-      </div>
-      <div class="menu__tabs" id="menuTabs"></div>
-      <div class="menu__grid"  id="menuGrid"></div>
-    </div>
-  </section>
-
-  <!-- ===== EVENTS ===== -->
-  <section class="events" id="events">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Мероприятия</span>
-        <h2 class="section-title">Для детей и взрослых</h2>
-        <p class="section-desc">Мастер-классы, праздники и детский лагерь</p>
-      </div>
-      <div class="events__grid">
-        <div class="event-card">
-          <div class="event-card__icon">🍪</div>
-          <h3>Роспись пряников</h3>
-          <p>Вместе расписываем пряники глазурью. Идеально для детей от 4 лет и взрослых, которые не разучились удивляться.</p>
-          <span class="event-card__price">от 300 ₽</span>
-        </div>
-        <div class="event-card">
-          <div class="event-card__icon">🧱</div>
-          <h3>Ручная лепка</h3>
-          <p>Лепим из глины и теста — развиваем моторику, фантазию и получаем удовольствие от творчества.</p>
-          <span class="event-card__price">от 300 ₽</span>
-        </div>
-        <div class="event-card">
-          <div class="event-card__icon">🎉</div>
-          <h3>Детские праздники</h3>
-          <p>Организуем дни рождения, тематические вечеринки и участие детей в больших праздниках. Всё под ключ.</p>
-          <span class="event-card__price">По запросу</span>
-        </div>
-        <div class="event-card">
-          <div class="event-card__icon">🏕️</div>
-          <h3>Лагерь «Зайцбург»</h3>
-          <p>Детский лагерь при кафе — творчество, игры и развитие в уютной атмосфере Hygge. Сезонный набор.</p>
-          <span class="event-card__price">По телефону</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== NEWS ===== -->
-  <section class="news" id="news">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Новости</span>
-        <h2 class="section-title">Последние события</h2>
-        <p class="section-desc">Следите за обновлениями меню, акциями и мероприятиями</p>
-      </div>
-      <div class="news__grid" id="newsGrid"></div>
-    </div>
-  </section>
-
-  <!-- ===== BOOKING ===== -->
-  <section class="booking" id="booking">
-    <div class="container">
-      <div class="booking__inner">
-        <div class="booking__text">
-          <span class="section-tag">Бронирование</span>
-          <h2 class="section-title">Забронируйте стол</h2>
-          <p>Оставьте заявку — мы свяжемся с вами для подтверждения.</p>
-          <a href="tel:+73472664343" class="booking__phone">
-            <span class="booking__phone-icon">📞</span>
-            +7 (347) 266-43-43
-          </a>
-          <p class="booking__address">
-            Уфа, ул. Бакалинская, 27<br>
-            ТЦ «Ультра», 3 этаж<br>
-            Вход со стороны «Лента»
-          </p>
-        </div>
-
-        <form class="booking__form" id="bookingForm" novalidate>
-          <div class="form-group">
-            <label for="bookName">Ваше имя</label>
-            <input type="text" id="bookName" placeholder="Иван Иванов" required>
-          </div>
-          <div class="form-group">
-            <label for="bookPhone">Телефон</label>
-            <input type="tel" id="bookPhone" placeholder="+7 (___) ___-__-__" required>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="bookDate">Дата</label>
-              <input type="date" id="bookDate" required>
-            </div>
-            <div class="form-group">
-              <label for="bookTime">Время</label>
-              <input type="time" id="bookTime" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="bookGuests">Количество гостей</label>
-            <select id="bookGuests">
-              <option value="1">1 человек</option>
-              <option value="2" selected>2 человека</option>
-              <option value="3">3 человека</option>
-              <option value="4">4 человека</option>
-              <option value="5">5 человек</option>
-              <option value="6+">6 и более</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="bookComment">Пожелания</label>
-            <textarea id="bookComment" rows="3"
-              placeholder="Детский праздник, аллергии, особые пожелания..."></textarea>
-          </div>
-          <button type="submit" class="btn btn--primary btn--full">Отправить заявку</button>
-          <div class="booking__success" id="bookingSuccess">
-            <span>✓</span> Заявка принята! Мы перезвоним вам в ближайшее время.
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FAQ ===== -->
-  <section class="faq" id="faq">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">FAQ</span>
-        <h2 class="section-title">Частые вопросы</h2>
-      </div>
-      <div class="faq__list">
-        <div class="faq__item">
-          <button class="faq__question">Где вы находитесь?</button>
-          <div class="faq__answer">
-            <p>Уфа, ул. Бакалинская, 27, ТЦ «Ультра», 3 этаж. Вход со стороны магазина «Лента». Мы работаем в часы работы торгового центра.</p>
-          </div>
-        </div>
-        <div class="faq__item">
-          <button class="faq__question">Нужно ли бронировать столик заранее?</button>
-          <div class="faq__answer">
-            <p>Для небольших компаний (до 3 человек) бронь необязательна. Для групп от 4 человек и для мастер-классов рекомендуем бронировать заранее по телефону или через форму на сайте.</p>
-          </div>
-        </div>
-        <div class="faq__item">
-          <button class="faq__question">Какие мастер-классы проводите для детей?</button>
-          <div class="faq__answer">
-            <p>Мы проводим мастер-классы по росписи пряников глазурью, ручной лепке из глины и теста, а также участие в тематических праздниках. Стоимость от 300 рублей, всё включено.</p>
-          </div>
-        </div>
-        <div class="faq__item">
-          <button class="faq__question">Что такое лагерь «Зайцбург»?</button>
-          <div class="faq__answer">
-            <p>«Зайцбург» — детский лагерь при кафе Hygge, где дети занимаются творчеством, участвуют в играх и развивающих активностях. Сезонный набор, подробности по телефону.</p>
-          </div>
-        </div>
-        <div class="faq__item">
-          <button class="faq__question">Можно ли провести детский день рождения?</button>
-          <div class="faq__answer">
-            <p>Конечно! Мы помогаем организовать день рождения под ключ: программа, мастер-классы и украшение. Свяжитесь с нами для обсуждения деталей.</p>
-          </div>
-        </div>
-        <div class="faq__item">
-          <button class="faq__question">Есть ли детское меню?</button>
-          <div class="faq__answer">
-            <p>Да, у нас есть специальное детское меню: детский сет (сок + сэндвич + пряник), какао, вафли с Нутеллой и расписной пряник с мастер-классом.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CONTACTS ===== -->
-  <section class="contacts" id="contacts">
-    <div class="container">
-      <div class="contacts__grid">
-        <div class="contacts__info">
-          <span class="section-tag">Контакты</span>
-          <h2 class="section-title">Приходите в гости</h2>
-          <div class="contacts__items">
-            <div class="contacts__item">
-              <span class="contacts__item-label">Адрес</span>
-              <span>Уфа, ул. Бакалинская, 27<br>ТЦ «Ультра», 3 этаж<br>Вход со стороны «Лента»</span>
-            </div>
-            <div class="contacts__item">
-              <span class="contacts__item-label">Телефон</span>
-              <a href="tel:+73472664343">+7 (347) 266-43-43</a>
-            </div>
-            <div class="contacts__item">
-              <span class="contacts__item-label">Режим работы</span>
-              <span>В часы работы ТЦ «Ультра»</span>
-            </div>
-          </div>
-        </div>
-        <div class="contacts__map">
-          <iframe
-            src="https://yandex.ru/map-widget/v1/?text=Уфа%2C+Бакалинская+27&z=16&lang=ru_RU"
-            title="Карта — Hygge Kafé"
-            loading="lazy"
-            allowfullscreen>
-          </iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <div class="footer__logo">
-          <span>Hygge</span>
-          <span>kafé</span>
-          <p>Уфа, ТЦ «Ультра», 3 этаж</p>
-        </div>
-        <nav class="footer__links" aria-label="Навигация">
-          <a href="#about">О нас</a>
-          <a href="#menu">Меню</a>
-          <a href="#events">Мероприятия</a>
-          <a href="#booking">Бронирование</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contacts">Контакты</a>
-        </nav>
-        <div class="footer__contacts">
-          <a href="tel:+73472664343">+7 (347) 266-43-43</a>
-          <a href="admin.html" class="footer__admin-link">Управление сайтом</a>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <p>© 2026 Hygge Kafé. Уфа</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
+// Инициализация
+renderTabs();
+renderItems();
+</script>
 </body>
 </html>
