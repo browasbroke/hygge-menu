@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hygge Kafé — Уютное кафе в Уфе</title>
+  <meta name="description" content="Hygge Kafé — уютное кафе на 3 этаже ТЦ Ультра в Уфе. Авторские напитки, детские мастер-классы, семейная атмосфера. Телефон: +7 (347) 266-43-43">
+  <meta property="og:title" content="Hygge Kafé — Уютное кафе в Уфе">
+  <meta property="og:description" content="Место, где время замедляется, а каждая чашка согревает душу">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav class="nav" id="nav">
+    <div class="nav__container">
+      <a href="#" class="nav__logo">
+        <span class="nav__logo-text">Hygge</span>
+        <span class="nav__logo-sub">kafé</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#menu">Меню</a></li>
+        <li><a href="#events">Мероприятия</a></li>
+        <li><a href="#news">Новости</a></li>
+        <li><a href="#booking">Бронь</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+      <a href="#booking" class="nav__cta">Забронировать</a>
+      <button class="nav__burger" id="navBurger" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <ul>
+      <li><a href="#about">О нас</a></li>
+      <li><a href="#menu">Меню</a></li>
+      <li><a href="#events">Мероприятия</a></li>
+      <li><a href="#news">Новости</a></li>
+      <li><a href="#booking">Бронирование</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">Уютное кафе в Уфе · ТЦ Ультра, 3 этаж</p>
+      <h1 class="hero__title">Hygge<br><em>Kafé</em></h1>
+      <p class="hero__subtitle">
+        Место, где время замедляется,<br>
+        а каждая чашка согревает душу
+      </p>
+      <div class="hero__actions">
+        <a href="#menu" class="btn btn--primary">Смотреть меню</a>
+        <a href="#booking" class="btn btn--ghost">Забронировать стол</a>
+      </div>
+    </div>
+    <div class="hero__scroll" aria-hidden="true">
+      <span>листай</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__text">
+          <span class="section-tag">О нас</span>
+          <h2 class="section-title">Hygge — это больше,<br>чем просто кафе</h2>
+          <p>
+            <em>Hygge</em> (произносится «хюгге») — датское слово, означающее
+            особое ощущение уюта, тепла и спокойного счастья. Именно это
+            мы стараемся подарить каждому гостю.
+          </p>
+          <p>
+            Мы находимся на третьем этаже ТЦ «Ультра» и предлагаем тихое
+            место среди городской суеты — для деловых встреч, семейных
+            завтраков, детских праздников и просто хорошего кофе.
+          </p>
+          <div class="about__features">
+            <div class="about__feature">
+              <div class="about__feature-icon">☕</div>
+              <div>
+                <strong>Авторские напитки</strong>
+                <span>Кофе, чай и авторские рецепты</span>
+              </div>
+            </div>
+            <div class="about__feature">
+              <div class="about__feature-icon">🎨</div>
+              <div>
+                <strong>Детские мастер-классы</strong>
+                <span>Роспись пряников, лепка и праздники</span>
+              </div>
+            </div>
+            <div class="about__feature">
+              <div class="about__feature-icon">🌿</div>
+              <div>
+                <strong>Уютная атмосфера</strong>
+                <span>Скандинавский стиль, тепло и спокойствие</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about__visual">
+          <div class="about__card about__card--big">
+            <div class="about__stat">
+              <span class="about__stat-num">5+</span>
+              <span>лет уюта<br>в Уфе</span>
+            </div>
+          </div>
+          <div class="about__card about__card--small">
+            <div class="about__stat">
+              <span class="about__stat-num">300 ₽</span>
+              <span>мастер-класс</span>
+            </div>
+          </div>
+          <div class="about__card">
+            <div class="about__stat">
+              <span class="about__stat-num">3 эт.</span>
+              <span>ТЦ «Ультра»</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MENU ===== -->
+  <section class="menu" id="menu">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Меню</span>
+        <h2 class="section-title">Что мы предлагаем</h2>
+        <p class="section-desc">Всё приготовлено с заботой и любовью к каждой детали</p>
+      </div>
+      <div class="menu__tabs" id="menuTabs"></div>
+      <div class="menu__grid"  id="menuGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== EVENTS ===== -->
+  <section class="events" id="events">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Мероприятия</span>
+        <h2 class="section-title">Для детей и взрослых</h2>
+        <p class="section-desc">Мастер-классы, праздники и детский лагерь</p>
+      </div>
+      <div class="events__grid">
+        <div class="event-card">
+          <div class="event-card__icon">🍪</div>
+          <h3>Роспись пряников</h3>
+          <p>Вместе расписываем пряники глазурью. Идеально для детей от 4 лет и взрослых, которые не разучились удивляться.</p>
+          <span class="event-card__price">от 300 ₽</span>
+        </div>
+        <div class="event-card">
+          <div class="event-card__icon">🧱</div>
+          <h3>Ручная лепка</h3>
+          <p>Лепим из глины и теста — развиваем моторику, фантазию и получаем удовольствие от творчества.</p>
+          <span class="event-card__price">от 300 ₽</span>
+        </div>
+        <div class="event-card">
+          <div class="event-card__icon">🎉</div>
+          <h3>Детские праздники</h3>
+          <p>Организуем дни рождения, тематические вечеринки и участие детей в больших праздниках. Всё под ключ.</p>
+          <span class="event-card__price">По запросу</span>
+        </div>
+        <div class="event-card">
+          <div class="event-card__icon">🏕️</div>
+          <h3>Лагерь «Зайцбург»</h3>
+          <p>Детский лагерь при кафе — творчество, игры и развитие в уютной атмосфере Hygge. Сезонный набор.</p>
+          <span class="event-card__price">По телефону</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NEWS ===== -->
+  <section class="news" id="news">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Новости</span>
+        <h2 class="section-title">Последние события</h2>
+        <p class="section-desc">Следите за обновлениями меню, акциями и мероприятиями</p>
+      </div>
+      <div class="news__grid" id="newsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== BOOKING ===== -->
+  <section class="booking" id="booking">
+    <div class="container">
+      <div class="booking__inner">
+        <div class="booking__text">
+          <span class="section-tag">Бронирование</span>
+          <h2 class="section-title">Забронируйте стол</h2>
+          <p>Оставьте заявку — мы свяжемся с вами для подтверждения.</p>
+          <a href="tel:+73472664343" class="booking__phone">
+            <span class="booking__phone-icon">📞</span>
+            +7 (347) 266-43-43
+          </a>
+          <p class="booking__address">
+            Уфа, ул. Бакалинская, 27<br>
+            ТЦ «Ультра», 3 этаж<br>
+            Вход со стороны «Лента»
+          </p>
+        </div>
+
+        <form class="booking__form" id="bookingForm" novalidate>
+          <div class="form-group">
+            <label for="bookName">Ваше имя</label>
+            <input type="text" id="bookName" placeholder="Иван Иванов" required>
+          </div>
+          <div class="form-group">
+            <label for="bookPhone">Телефон</label>
+            <input type="tel" id="bookPhone" placeholder="+7 (___) ___-__-__" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookDate">Дата</label>
+              <input type="date" id="bookDate" required>
+            </div>
+            <div class="form-group">
+              <label for="bookTime">Время</label>
+              <input type="time" id="bookTime" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bookGuests">Количество гостей</label>
+            <select id="bookGuests">
+              <option value="1">1 человек</option>
+              <option value="2" selected>2 человека</option>
+              <option value="3">3 человека</option>
+              <option value="4">4 человека</option>
+              <option value="5">5 человек</option>
+              <option value="6+">6 и более</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="bookComment">Пожелания</label>
+            <textarea id="bookComment" rows="3"
+              placeholder="Детский праздник, аллергии, особые пожелания..."></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">Отправить заявку</button>
+          <div class="booking__success" id="bookingSuccess">
+            <span>✓</span> Заявка принята! Мы перезвоним вам в ближайшее время.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">FAQ</span>
+        <h2 class="section-title">Частые вопросы</h2>
+      </div>
+      <div class="faq__list">
+        <div class="faq__item">
+          <button class="faq__question">Где вы находитесь?</button>
+          <div class="faq__answer">
+            <p>Уфа, ул. Бакалинская, 27, ТЦ «Ультра», 3 этаж. Вход со стороны магазина «Лента». Мы работаем в часы работы торгового центра.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">Нужно ли бронировать столик заранее?</button>
+          <div class="faq__answer">
+            <p>Для небольших компаний (до 3 человек) бронь необязательна. Для групп от 4 человек и для мастер-классов рекомендуем бронировать заранее по телефону или через форму на сайте.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">Какие мастер-классы проводите для детей?</button>
+          <div class="faq__answer">
+            <p>Мы проводим мастер-классы по росписи пряников глазурью, ручной лепке из глины и теста, а также участие в тематических праздниках. Стоимость от 300 рублей, всё включено.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">Что такое лагерь «Зайцбург»?</button>
+          <div class="faq__answer">
+            <p>«Зайцбург» — детский лагерь при кафе Hygge, где дети занимаются творчеством, участвуют в играх и развивающих активностях. Сезонный набор, подробности по телефону.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">Можно ли провести детский день рождения?</button>
+          <div class="faq__answer">
+            <p>Конечно! Мы помогаем организовать день рождения под ключ: программа, мастер-классы и украшение. Свяжитесь с нами для обсуждения деталей.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question">Есть ли детское меню?</button>
+          <div class="faq__answer">
+            <p>Да, у нас есть специальное детское меню: детский сет (сок + сэндвич + пряник), какао, вафли с Нутеллой и расписной пряник с мастер-классом.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACTS ===== -->
+  <section class="contacts" id="contacts">
+    <div class="container">
+      <div class="contacts__grid">
+        <div class="contacts__info">
+          <span class="section-tag">Контакты</span>
+          <h2 class="section-title">Приходите в гости</h2>
+          <div class="contacts__items">
+            <div class="contacts__item">
+              <span class="contacts__item-label">Адрес</span>
+              <span>Уфа, ул. Бакалинская, 27<br>ТЦ «Ультра», 3 этаж<br>Вход со стороны «Лента»</span>
+            </div>
+            <div class="contacts__item">
+              <span class="contacts__item-label">Телефон</span>
+              <a href="tel:+73472664343">+7 (347) 266-43-43</a>
+            </div>
+            <div class="contacts__item">
+              <span class="contacts__item-label">Режим работы</span>
+              <span>В часы работы ТЦ «Ультра»</span>
+            </div>
+          </div>
+        </div>
+        <div class="contacts__map">
+          <iframe
+            src="https://yandex.ru/map-widget/v1/?text=Уфа%2C+Бакалинская+27&z=16&lang=ru_RU"
+            title="Карта — Hygge Kafé"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__logo">
+          <span>Hygge</span>
+          <span>kafé</span>
+          <p>Уфа, ТЦ «Ультра», 3 этаж</p>
+        </div>
+        <nav class="footer__links" aria-label="Навигация">
+          <a href="#about">О нас</a>
+          <a href="#menu">Меню</a>
+          <a href="#events">Мероприятия</a>
+          <a href="#booking">Бронирование</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contacts">Контакты</a>
+        </nav>
+        <div class="footer__contacts">
+          <a href="tel:+73472664343">+7 (347) 266-43-43</a>
+          <a href="admin.html" class="footer__admin-link">Управление сайтом</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 Hygge Kafé. Уфа</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
