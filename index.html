@@ -115,9 +115,8 @@
       overflow: hidden;
       display: flex;
       align-items: center;
-      gap: 0;
       box-shadow: 0 1px 8px rgba(45,32,23,.07);
-      transition: transform .15s ease, box-shadow .15s ease;
+      transition: transform .15s ease;
       cursor: pointer;
     }
     .card:active { transform: scale(.98); }
@@ -131,12 +130,6 @@
       align-items: center;
       justify-content: center;
       font-size: 32px;
-      overflow: hidden;
-    }
-    .card__img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
 
     .card__body {
@@ -200,14 +193,6 @@
     }
     .book-btn__inner:active { background: var(--brown-d); transform: scale(.98); }
 
-    /* ---- Empty state ---- */
-    .empty {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
     /* ---- Entrance animation ---- */
     @keyframes fadeUp {
       from { opacity:0; transform:translateY(12px); }
@@ -222,6 +207,213 @@
     .card:nth-child(6)  { animation-delay: .18s; }
     .card:nth-child(7)  { animation-delay: .21s; }
     .card:nth-child(8)  { animation-delay: .24s; }
+
+    /* ==============================
+       Схема зала
+    ============================== */
+    .hall-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 14px rgba(45,32,23,.12);
+    }
+
+    .hall {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 8 / 7;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(0,0,0,.025) 0px, rgba(0,0,0,.025) 1px,
+          transparent 1px, transparent 44px
+        ),
+        #EAE0CE;
+      border-top:   4px solid #A89480;
+      border-left:  4px solid #A89480;
+      border-right: 2px solid #C4B4A0;
+      border-bottom: 1px solid #D4C4B0;
+      overflow: hidden;
+    }
+
+    /* Обёртка столика */
+    .t-wrap {
+      position: absolute;
+      width: 10.5%;
+      height: 12%;
+      overflow: visible;
+      z-index: 1;
+    }
+
+    /* Стул — по одному на каждую сторону */
+    .ch {
+      position: absolute;
+      background: #BEB2A0;
+      border-radius: 3px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Горизонтальные стулья (сверху/снизу) */
+    .ch.t, .ch.b { width: 46%; height: 22%; left: 27%; }
+    .ch.t { top: -28%; }
+    .ch.b { bottom: -28%; }
+    /* Вертикальные стулья (слева/справа) */
+    .ch.l, .ch.r { width: 22%; height: 46%; top: 27%; }
+    .ch.l { left: -28%; }
+    .ch.r { right: -28%; }
+
+    /* Барная стойка */
+    .hall-bar-counter {
+      position: absolute;
+      left: 87%; top: 5%; right: 0; height: 73%;
+      background: linear-gradient(to left, #BDB0A0, #CEBFAF);
+      border-radius: 4px 0 0 4px;
+      border: 1px solid #B0A090;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 1;
+    }
+    /* Табуретки внутри стойки */
+    .hall-bar-counter::after {
+      content: '';
+      position: absolute;
+      left: 8%; top: 5%; bottom: 5%;
+      width: 30%;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.35) 0%, rgba(255,255,255,.35) 12%,
+        transparent 12%, transparent 20%
+      );
+      border-radius: 3px;
+    }
+
+    /* Фотозона */
+    .hall-photo-zone {
+      position: absolute;
+      left: 72%; top: 75%;
+      width: 14%; height: 14%;
+      background: #D8C8B8;
+      border-radius: 6px;
+      border: 1px dashed #C0AE9C;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hz-label {
+      font-size: 6px;
+      font-weight: 600;
+      color: rgba(90,70,55,.6);
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Стол */
+    .ht {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      border: none;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+      transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      z-index: 1;
+    }
+
+    .ht.free {
+      background: var(--sage);
+      box-shadow: 0 2px 5px rgba(80,120,80,.2);
+    }
+    .ht.free:active,
+    .ht.free.sel {
+      background: var(--brown);
+      transform: scale(1.08);
+      box-shadow: 0 3px 10px rgba(140,109,79,.4);
+    }
+    .ht.free.sel ~ .ch { background: #A89070; }
+
+    /* Огонь (камин) */
+    .hall-fire {
+      position: absolute;
+      left: 37%;
+      top: 41%;
+      width: 20%;
+      height: 11%;
+      background: #D0BEA4;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      pointer-events: none;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+      z-index: 1;
+    }
+
+    /* Надпись «Бар» */
+    .hall-bar-label {
+      position: absolute;
+      right: 1%;
+      top: 30%;
+      font-size: 9px;
+      font-weight: 600;
+      color: rgba(90,70,50,.5);
+      letter-spacing: 2px;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      pointer-events: none;
+    }
+
+    /* Вход */
+    .hall-entrance {
+      position: absolute;
+      top: 91%;
+      left: 22%;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      pointer-events: none;
+      letter-spacing: 0.5px;
+    }
+
+    /* ---- Легенда и баннер выбранного столика ---- */
+    .hall-legend {
+      display: flex;
+      gap: 14px;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+    .hall-legend-item { display: flex; align-items: center; gap: 5px; }
+    .hall-dot { width: 12px; height: 9px; border-radius: 3px; flex-shrink: 0; }
+
+    .hall-selected {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: var(--brown);
+      color: white;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      animation: fadeUp .2s ease;
+    }
   </style>
 </head>
 <body>
@@ -245,8 +437,7 @@
 
 <script>
 // ============================================================
-//  Меню данные
-//  Обновляй здесь когда меняется меню в кафе
+//  Меню
 // ============================================================
 const MENU = {
   "🍳 Завтраки": {
@@ -350,46 +541,113 @@ const MENU = {
 };
 
 // ============================================================
+//  Схема зала
+//  ok:true  — столик доступен для брони
+//  ok:false — недоступен (бар, фотозона и пр.)
+// ============================================================
+const TABLES_TAB = '__tables__';
+
+const TABLES = [
+  // Левая стена
+  { n:8,  l:1,  t:3,  ok:true  },
+  { n:7,  l:1,  t:27, ok:true  },
+  { n:6,  l:1,  t:53, ok:true  },
+  // Верхний ряд
+  { n:9,  l:22, t:3,  ok:true  },
+  { n:10, l:34, t:3,  ok:true  },
+  { n:11, l:46, t:3,  ok:true  },
+  { n:12, l:58, t:3,  ok:true  },
+  { n:13, l:73, t:3,  ok:true  },
+  // Центр верхний
+  { n:17, l:22, t:28, ok:true  },
+  { n:16, l:34, t:28, ok:true  },
+  { n:15, l:46, t:28, ok:true  },
+  { n:14, l:58, t:28, ok:true  },
+  // Центр нижний
+  { n:18, l:22, t:54, ok:true  },
+  { n:19, l:34, t:54, ok:true  },
+  { n:20, l:46, t:54, ok:true  },
+  { n:21, l:58, t:54, ok:true  },
+  // Нижний ряд — доступен только 3
+  { n:3,  l:44, t:80, ok:true  },
+  { n:5,  l:1,  t:80, ok:false },
+  { n:4,  l:14, t:80, ok:false },
+  { n:2,  l:59, t:80, ok:false },
+  { n:1,  l:73, t:70, ok:false, sub:'📷' },
+  // Барная стойка (22–26)
+  { n:22, l:87, t:7,  ok:false },
+  { n:23, l:87, t:21, ok:false },
+  { n:24, l:87, t:35, ok:false },
+  { n:25, l:87, t:49, ok:false },
+  { n:26, l:87, t:63, ok:false },
+];
+
+const selectedTables = new Set();
+
+// ============================================================
 //  Telegram Web App
 // ============================================================
-const tg = window.Telegram.WebApp;
+const tg = window.Telegram?.WebApp || {
+  ready: () => {}, expand: () => {},
+  sendData: () => {}, initData: ''
+};
 tg.ready();
 tg.expand();
 
 // ============================================================
-//  Рендер
+//  Навигация
 // ============================================================
 let activeCategory = Object.keys(MENU)[0];
 
 function renderTabs() {
   const tabs = document.getElementById('tabs');
-  tabs.innerHTML = Object.keys(MENU).map(cat => {
-    const { emoji } = MENU[cat];
-    const label = cat.replace(/^\S+\s+/, '');  // убираем эмодзи из названия
+
+  const hallBtn = `<button class="tab ${activeCategory === TABLES_TAB ? 'active' : ''}"
+    onclick="switchCategory('${TABLES_TAB}')">🪑 Столики</button>`;
+
+  const menuBtns = Object.keys(MENU).map(cat => {
+    const emoji = MENU[cat].emoji;
+    const label = cat.replace(/^\S+\s+/, '');
     return `<button class="tab ${cat === activeCategory ? 'active' : ''}"
       onclick="switchCategory('${cat.replace(/'/g, "\\'")}')"
     >${emoji} ${label}</button>`;
   }).join('');
+
+  tabs.innerHTML = hallBtn + menuBtns;
 }
 
-function renderItems() {
+function switchCategory(cat) {
+  activeCategory = cat;
+  renderTabs();
+  renderContent();
+  document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
+  const active = document.querySelector('.tab.active');
+  if (active) active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+
+function renderContent() {
+  if (activeCategory === TABLES_TAB) {
+    renderHall();
+  } else {
+    renderMenu();
+  }
+  updateBookBtn();
+}
+
+// ============================================================
+//  Меню
+// ============================================================
+function renderMenu() {
   const { items, note } = MENU[activeCategory];
   document.getElementById('sectionTitle').textContent =
     activeCategory.replace(/^\S+\s+/, '');
 
   const list = document.getElementById('menuList');
+  const noteHtml = note
+    ? `<div style="background:var(--beige);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--muted);margin-bottom:4px">⏰ ${note}</div>`
+    : '';
 
-  if (note) {
-    list.innerHTML = `<div style="
-      background:var(--beige);border-radius:10px;
-      padding:10px 14px;font-size:12px;color:var(--muted);
-      margin-bottom:4px;
-    ">⏰ ${note}</div>`;
-  } else {
-    list.innerHTML = '';
-  }
-
-  list.innerHTML += items.map(item => `
+  list.innerHTML = noteHtml + items.map(item => `
     <div class="card">
       <div class="card__img">${MENU[activeCategory].emoji}</div>
       <div class="card__body">
@@ -401,29 +659,93 @@ function renderItems() {
   `).join('');
 }
 
-function switchCategory(cat) {
-  activeCategory = cat;
-  renderTabs();
-  renderItems();
-  // Scroll content to top
-  document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
-  // Scroll active tab into view
-  const activetab = document.querySelector('.tab.active');
-  if (activetab) activetab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+// ============================================================
+//  Схема зала
+// ============================================================
+function renderHall() {
+  document.getElementById('sectionTitle').textContent = 'Схема зала';
+
+  // Конфиг стульев: t=сверху b=снизу l=слева r=справа
+  const CHAIRS = {
+    8:  'br',  // угол (верх+лево стена): справа и снизу
+    9:'b', 10:'b', 11:'b', 12:'b', 13:'b', // верхняя стена: только снизу
+    7:  'r',   // левая стена (банкетка): только справа
+    6:  'r',   // левая стена (банкетка): только справа
+    17:'t', 16:'t', 15:'t', 14:'t',  // над камином: только сверху (снизу камин)
+    18:'b', 19:'b', 20:'b', 21:'b',  // под камином: только снизу (сверху камин)
+    3:  'lr',  // у входа: слева и справа
+  };
+
+  const tablesHtml = TABLES
+    .filter(t => t.ok)
+    .map(t => {
+      const isSel = selectedTables.has(t.n);
+      const btnCls = `ht free${isSel ? ' sel' : ''}`;
+      const icon = isSel ? '✓' : '';
+      const cfg = CHAIRS[t.n] || 'tb';
+      const ch = s => cfg.includes(s) ? `<div class="ch ${s}"></div>` : '';
+      return `
+        <div class="t-wrap" style="left:${t.l}%;top:${t.t}%">
+          ${ch('t')}${ch('b')}${ch('l')}${ch('r')}
+          <button class="${btnCls}" onclick="selectTable(${t.n})">${icon}</button>
+        </div>`;
+    }).join('');
+
+  const count = selectedTables.size;
+  const banner = count > 0
+    ? `<div class="hall-selected">✅ Выбрано мест: ${count} — нажмите кнопку ниже</div>`
+    : '';
+
+  document.getElementById('menuList').innerHTML = `
+    <div class="hall-wrap">
+      <div class="hall">
+        ${tablesHtml}
+        <div class="hall-bar-counter"><span class="hall-bar-label">БАР</span></div>
+        <div class="hall-photo-zone">📷<div class="hz-label">Фотозона</div></div>
+        <div class="hall-fire">🔥</div>
+        <div class="hall-entrance">↑ Вход</div>
+      </div>
+    </div>
+    <div class="hall-legend">
+      <div class="hall-legend-item">
+        <div class="hall-dot" style="background:var(--sage)"></div><span>Свободно</span>
+      </div>
+      <div class="hall-legend-item">
+        <div class="hall-dot" style="background:var(--brown)"></div><span>Выбрано</span>
+      </div>
+    </div>
+    ${banner}
+  `;
+}
+
+function selectTable(n) {
+  if (selectedTables.has(n)) selectedTables.delete(n);
+  else selectedTables.add(n);
+  renderHall();
+  updateBookBtn();
+}
+
+function updateBookBtn() {
+  const btn = document.getElementById('bookBtn');
+  const count = selectedTables.size;
+  btn.textContent = count > 0
+    ? `🗓 Забронировать (${count} ${count === 1 ? 'место' : 'места'})`
+    : '🗓 Забронировать столик';
 }
 
 // ---- Кнопка бронирования ----
 document.getElementById('bookBtn').addEventListener('click', () => {
-  tg.sendData(JSON.stringify({ action: 'book' }));
-  // Если открыто не из бота — закрываем и показываем подсказку
+  const payload = { action: 'book' };
+  if (selectedTables.size > 0) payload.tables = [...selectedTables];
+  tg.sendData(JSON.stringify(payload));
   if (!tg.initData) {
-    alert('Откройте бота @HyggeKafeBot и нажмите "Забронировать стол"');
+    alert('Откройте бота @HyggeKafeBot и нажмите «Открыть меню»');
   }
 });
 
 // Инициализация
 renderTabs();
-renderItems();
+renderContent();
 </script>
 </body>
 </html>
